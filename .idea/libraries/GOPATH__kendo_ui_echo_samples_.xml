@@ -1,0 +1,63 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;kendo-ui-echo-samples&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="file://$PROJECT_DIR$/../../HouzuoGuo/tiedot/.git" />
+      <root url="file://$PROJECT_DIR$/../../beego/bee/testdata" />
+      <root url="file://$PROJECT_DIR$/../../tools/godep/.git" />
+      <root url="file://$PROJECT_DIR$/../../andybalholm/cascadia/.git" />
+      <root url="file://$PROJECT_DIR$/../../go-sql-driver/mysql/.git" />
+      <root url="file://$PROJECT_DIR$/../../beego/bee/.git" />
+      <root url="file://$PROJECT_DIR$/../../tools/godep/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../../dgrijalva/jwt-go/.git" />
+      <root url="file://$PROJECT_DIR$/../../howeyc/fsnotify/.git" />
+      <root url="file://$PROJECT_DIR$/../../facebookgo/clock/.git" />
+      <root url="file://$PROJECT_DIR$/../../labstack/echo/website/layouts/_default" />
+      <root url="file://$PROJECT_DIR$/../../jtolds/gls/.git" />
+      <root url="file://$PROJECT_DIR$/../kendo-ui-samples/.idea" />
+      <root url="file://$PROJECT_DIR$/../../facebookgo/grace/.git" />
+      <root url="file://$PROJECT_DIR$/../test1/.idea" />
+      <root url="file://$PROJECT_DIR$/../../astaxie/beego/.git" />
+      <root url="file://$PROJECT_DIR$/../kendo-ui-samples/.git" />
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$PROJECT_DIR$/../killer4java/.idea" />
+      <root url="file://$PROJECT_DIR$/../../labstack/echo/.git" />
+      <root url="file://$PROJECT_DIR$/.idea" />
+      <root url="file://$PROJECT_DIR$/../kendo-ui-samples-new/.git" />
+      <root url="file://$PROJECT_DIR$/../../facebookgo/stats/.git" />
+      <root url="file://$PROJECT_DIR$/../kendo-ui-samples-new/.idea" />
+      <root url="file://$PROJECT_DIR$/../go-app1/.idea" />
+      <root url="file://$PROJECT_DIR$/../../facebookgo/httpdown/.git" />
+      <root url="file://$PROJECT_DIR$/.git" />
+      <root url="file://$PROJECT_DIR$/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/html/charset/testdata" />
+      <root url="file://$PROJECT_DIR$/../../tylerb/graceful/.git" />
+      <root url="file://$PROJECT_DIR$/../workspace-1/.metadata" />
+      <root url="file://$PROJECT_DIR$/../../bradfitz/http2/testdata" />
+      <root url="file://$PROJECT_DIR$/../test2/.idea" />
+      <root url="file://$PROJECT_DIR$/../../PuerkitoBio/goquery/testdata" />
+      <root url="file://$PROJECT_DIR$/../../labstack/gommon/.git" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/.git" />
+      <root url="file://$PROJECT_DIR$/../echo-app1/.idea" />
+      <root url="file://$PROJECT_DIR$/../../nu7hatch/gouuid/.git" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/http2/testdata" />
+      <root url="file://$PROJECT_DIR$/../../lib/pq/.git" />
+      <root url="file://$PROJECT_DIR$/../../bradfitz/http2/.git" />
+      <root url="file://$PROJECT_DIR$/../../smartystreets/goconvey/.git" />
+      <root url="file://$PROJECT_DIR$/../sti-labs-golang1/.git" />
+      <root url="file://$PROJECT_DIR$/../../PuerkitoBio/goquery/.git" />
+      <root url="file://$PROJECT_DIR$/../echo-app1/Godeps/_workspace" />
+      <root url="file://$PROJECT_DIR$/../kendo-ui-samples/models/testdata" />
+      <root url="file://$PROJECT_DIR$/../../telerik/kendo-ui-core/.git" />
+      <root url="file://$PROJECT_DIR$/../../smartystreets/assertions/.git" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/html/testdata" />
+      <root url="file://$PROJECT_DIR$/../sti-labs-golang1/S2I/.sti" />
+      <root url="file://$PROJECT_DIR$/../../astaxie/beego/utils/testdata" />
+    </excluded>
+  </library>
+</component>
