@@ -1,0 +1,33 @@
+{
+	"ImportPath": "github.com/amsokol/kendo-ui-echo-samples",
+	"GoVersion": "go1.5.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/bradfitz/http2",
+			"Rev": "6608b73ef18668469ee5365431dc3a106502c449"
+		},
+		{
+			"ImportPath": "github.com/labstack/echo",
+			"Comment": "v1.2.0-15-ge2b394e",
+			"Rev": "e2b394e6c9307250fbe33b4e597e6a4970f3b1ff"
+		},
+		{
+			"ImportPath": "github.com/labstack/gommon/color",
+			"Comment": "v0.0.3-7-g3c61341",
+			"Rev": "3c613419957bbd5afea3fc87bbc0f9f2dca19196"
+		},
+		{
+			"ImportPath": "github.com/tylerb/graceful",
+			"Comment": "v1.2.3",
+			"Rev": "48afeb21e2fcbcff0f30bd5ad6b97747b0fae38e"
+		},
+		{
+			"ImportPath": "golang.org/x/net/netutil",
+			"Rev": "cd8c2701a5e10f044db915e65eac68f738399d22"
+		},
+		{
+			"ImportPath": "golang.org/x/net/websocket",
+			"Rev": "cd8c2701a5e10f044db915e65eac68f738399d22"
+		}
+	]
+}
