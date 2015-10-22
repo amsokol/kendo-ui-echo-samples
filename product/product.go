@@ -1,9 +1,9 @@
 package product
 
 import (
-	"github.com/amsokol/kendo-ui-echo-samples/Godeps/_workspace/src/github.com/labstack/echo"
 	"github.com/amsokol/kendo-ui-echo-samples/kendoui"
 	"github.com/amsokol/kendo-ui-echo-samples/logger"
+	"github.com/labstack/echo"
 	"net/http"
 )
 
