@@ -1,8 +1,8 @@
 package logger
 
 import (
-	"log"
 	"encoding/json"
+	"log"
 )
 
 func Json(v interface{}) {

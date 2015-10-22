@@ -23,7 +23,6 @@ const (
 	OperatorStartsWith = iota
 )
 
-
 type RequestInput struct {
 	Filter Filter
 }
@@ -95,7 +94,7 @@ func (i *RequestInput) extractFilterItem(keys []string, value []string) (err err
 	}
 	l := len(i.Filter.Filters)
 	if l <= index {
-		i.Filter.Filters = append(i.Filter.Filters, make([]FilterItem, index - l + 1)...)
+		i.Filter.Filters = append(i.Filter.Filters, make([]FilterItem, index-l+1)...)
 	}
 	switch strings.TrimRight(keys[1], "]") {
 	case "field":
