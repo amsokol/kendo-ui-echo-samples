@@ -45,21 +45,18 @@ func Input(r *http.Request) *RequestInput {
 			Filters: make([]FilterItem, 0),
 		},
 	}
-	i.Parse(r.URL.Query())
-	//	i.Parse(r.Form)
+	i.Extract(r.URL.Query())
+	i.Extract(r.Form)
 	return i
 }
 
-func (i *RequestInput) Parse(vs url.Values) {
+func (i *RequestInput) Extract(vs url.Values) {
 	for key, value := range vs {
 		keys := strings.Split(key, "[")
 		var err error
 		switch keys[0] {
 		case "filter":
 			err = i.extractFilter(keys[1:], value)
-		default:
-			// ignoring parameter
-			// log.Println(fmt.Sprint("unsupported request parameter key='", key, "', value='", value, "'"))
 		}
 		if err != nil {
 			log.Println(err, "key='", key, "', value='", value, "'")
@@ -73,7 +70,7 @@ func (i *RequestInput) extractFilter(keys []string, value []string) (err error) 
 	}
 	switch strings.TrimRight(keys[0], "]") {
 	case "logic":
-		i.Filter.Logic, err = getLogicValue(value)
+		i.Filter.Logic, err = getLogic(value)
 	case "filters":
 		err = i.extractFilterItem(keys[1:], value)
 	default:
@@ -83,14 +80,12 @@ func (i *RequestInput) extractFilter(keys []string, value []string) (err error) 
 }
 
 func (i *RequestInput) extractFilterItem(keys []string, value []string) (err error) {
-	var ok bool
-
 	if len(keys) != 2 {
 		return errors.New("filter[filters] must have two sub-parameters")
 	}
 	var index int
 	if index, err = strconv.Atoi(strings.TrimRight(keys[0], "]")); err != nil {
-		return errors.New("filter[filters] has unsupported sub-parameter - must be [<index>]")
+		return
 	}
 	l := len(i.Filter.Filters)
 	if l <= index {
@@ -98,31 +93,23 @@ func (i *RequestInput) extractFilterItem(keys []string, value []string) (err err
 	}
 	switch strings.TrimRight(keys[1], "]") {
 	case "field":
-		i.Filter.Filters[index].Field, ok = getStringValue(value)
-		if !ok {
-			err = errors.New("filter[filters][<index>][field] must have single value")
-		}
+		i.Filter.Filters[index].Field, err = getString(value)
 	case "ignoreCase":
-		i.Filter.Filters[index].IgnoreCase, ok = getBoolValue(value)
-		if !ok {
-			err = errors.New("filter[filters][<index>][ignoreCase] must have single bool value")
-		}
+		i.Filter.Filters[index].IgnoreCase, err = getBool(value)
 	case "operator":
-		i.Filter.Filters[index].Operator, err = getOperatorValue(value)
+		i.Filter.Filters[index].Operator, err = getOperator(value)
 	case "value":
-		i.Filter.Filters[index].Value, ok = getStringValue(value)
-		if !ok {
-			err = errors.New("filter[filters][<index>][value] must have single value")
-		}
+		i.Filter.Filters[index].Value, err = getString(value)
 	default:
 		err = errors.New("filter[filters][<index>] has unsupported sub-parameter")
 	}
 	return
 }
 
-func getLogicValue(value []string) (v int, err error) {
-	s, ok := getStringValue(value)
-	if ok {
+func getLogic(value []string) (v int, err error) {
+	var s string
+	s, err = getString(value)
+	if err == nil {
 		switch s {
 		case "and":
 			v = LogicAnd
@@ -135,9 +122,10 @@ func getLogicValue(value []string) (v int, err error) {
 	return
 }
 
-func getOperatorValue(value []string) (v int, err error) {
-	s, ok := getStringValue(value)
-	if ok {
+func getOperator(value []string) (v int, err error) {
+	var s string
+	s, err = getString(value)
+	if err == nil {
 		switch s {
 		case "startswith":
 			v = OperatorStartsWith
@@ -150,21 +138,20 @@ func getOperatorValue(value []string) (v int, err error) {
 	return
 }
 
-func getStringValue(value []string) (v string, ok bool) {
-	ok = len(value) == 1
-	if ok {
+func getString(value []string) (v string, err error) {
+	if len(value) == 1 {
 		v = value[0]
+	} else {
+		err = errors.New("must have single value")
 	}
 	return
 }
 
-func getBoolValue(value []string) (v bool, ok bool) {
+func getBool(value []string) (v bool, err error) {
 	var s string
-	var err error
-	s, ok = getStringValue(value)
-	if ok {
+	s, err = getString(value)
+	if err == nil {
 		v, err = strconv.ParseBool(s)
-		ok = err == nil
 	}
 	return
 }
