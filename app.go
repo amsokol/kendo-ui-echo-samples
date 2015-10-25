@@ -32,6 +32,10 @@ func main() {
 	// Echo instance
 	e := echo.New()
 
+	// Static test web pages
+	e.Static("/", "website")
+	e.Index("website/index.html")
+
 	// Customization
 	e.SetDebug(true)
 
@@ -55,5 +59,5 @@ func main() {
 }
 
 func routes(e *echo.Echo) {
-	e.Get("/", product.GetProducts)
+	e.Get("/products", product.GetProducts)
 }
