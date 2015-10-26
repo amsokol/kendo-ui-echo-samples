@@ -4,6 +4,7 @@ import (
 	//for extracting service credentials from VCAP_SERVICES
 	//"github.com/cloudfoundry-community/go-cfenv"
 
+	"github.com/amsokol/kendo-ui-echo-samples/data"
 	"github.com/amsokol/kendo-ui-echo-samples/product"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
@@ -27,6 +28,22 @@ func main() {
 	var host string
 	if host = os.Getenv("VCAP_APP_HOST"); len(host) == 0 {
 		host = DEFAULT_HOST
+	}
+
+	// prepare folder for DB with sample data
+	dir := "./.db"
+	os.RemoveAll(dir)
+	defer os.RemoveAll(dir)
+
+	// init sample data
+	if err := data.InitDb(dir); err != nil {
+		log.Panic(err)
+	}
+	defer data.Db.Close()
+
+	// init sample data
+	if err := data.InitData(data.Db); err != nil {
+		log.Panic(err)
 	}
 
 	// Echo instance

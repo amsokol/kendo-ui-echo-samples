@@ -1,21 +1,40 @@
 package product
 
 import (
+	"github.com/amsokol/kendo-ui-echo-samples/data"
 	"github.com/amsokol/kendo-ui-echo-samples/kendoui"
 	"github.com/amsokol/kendo-ui-echo-samples/logger"
 	"github.com/labstack/echo"
 	"net/http"
+	"log"
+	"encoding/json"
 )
 
 type Product struct {
-	Id   string `json:"id"`
-	Name string `json:"name"`
+	Id   int    `json:"Id,omitempty"`
+	Name string `json:"Name,omitempty"`
 }
 
-func GetProducts(c *echo.Context) error {
+func GetProducts(c *echo.Context) (err error) {
 	i := kendoui.Input(c.Request())
 	logger.Json(i)
 
 	callback := "asd" //c.Query("callback")
-	return c.JSONP(http.StatusOK, callback, &Product{Id: "1234567890", Name: "qwertyuiop!!!"})
+
+	products := make([]Product, 0)
+
+	col := data.Db.Use("Products")
+	if col != nil {
+		col.ForEachDoc(func(id int, docContent []byte) (willMoveOn bool) {
+			var p Product
+			if err := json.Unmarshal(docContent, &p); err == nil {
+				p.Id = id
+				products = append(products, p)
+			} else {
+				log.Println("failed to unmarshal Product", id, "is", string(docContent))
+			}
+			return true
+		})
+	}
+	return c.JSONP(http.StatusOK, callback, products)
 }
