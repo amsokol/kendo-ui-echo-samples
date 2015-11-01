@@ -4,8 +4,8 @@ import (
 	//for extracting service credentials from VCAP_SERVICES
 	//"github.com/cloudfoundry-community/go-cfenv"
 
-	"github.com/amsokol/kendo-ui-echo-samples/data"
 	"github.com/amsokol/kendo-ui-echo-samples/api/product"
+	"github.com/amsokol/kendo-ui-echo-samples/data"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
 	"github.com/tylerb/graceful"

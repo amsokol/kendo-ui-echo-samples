@@ -1,13 +1,13 @@
 package product
 
 import (
+	"encoding/json"
+	"github.com/amsokol/kendo-ui-echo-samples/api/kendoui"
+	"github.com/amsokol/kendo-ui-echo-samples/api/logger"
 	"github.com/amsokol/kendo-ui-echo-samples/data"
 	"github.com/labstack/echo"
-	"net/http"
 	"log"
-	"encoding/json"
-	"github.com/amsokol/kendo-ui-echo-samples/api/logger"
-"github.com/amsokol/kendo-ui-echo-samples/api/kendoui"
+	"net/http"
 )
 
 type Product struct {
