@@ -2,12 +2,12 @@ package product
 
 import (
 	"github.com/amsokol/kendo-ui-echo-samples/data"
-	"github.com/amsokol/kendo-ui-echo-samples/kendoui"
-	"github.com/amsokol/kendo-ui-echo-samples/logger"
 	"github.com/labstack/echo"
 	"net/http"
 	"log"
 	"encoding/json"
+	"github.com/amsokol/kendo-ui-echo-samples/api/logger"
+"github.com/amsokol/kendo-ui-echo-samples/api/kendoui"
 )
 
 type Product struct {

@@ -14,18 +14,18 @@ func InitDb(dir string) (err error) {
 	return
 }
 
-func InitData(dbs *db.DB) (err error) {
-	if err = initProducts(dbs); err != nil {
+func InitData() (err error) {
+	if err = initProducts(); err != nil {
 		return
 	}
 	return
 }
 
-func initProducts(dbs *db.DB) (err error) {
-	if err = dbs.Create("Products"); err != nil {
+func initProducts() (err error) {
+	if err = Db.Create("Products"); err != nil {
 		return
 	}
-	products := dbs.Use("Products")
+	products := Db.Use("Products")
 	products.Insert(map[string]interface{}{"Name": "iPhone 6s"})
 	products.Insert(map[string]interface{}{"Name": "iPad 2"})
 	products.Insert(map[string]interface{}{"Name": "Huawey P8"})

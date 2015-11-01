@@ -5,7 +5,7 @@ import (
 	//"github.com/cloudfoundry-community/go-cfenv"
 
 	"github.com/amsokol/kendo-ui-echo-samples/data"
-	"github.com/amsokol/kendo-ui-echo-samples/product"
+	"github.com/amsokol/kendo-ui-echo-samples/api/product"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
 	"github.com/tylerb/graceful"
@@ -42,7 +42,7 @@ func main() {
 	defer data.Db.Close()
 
 	// init sample data
-	if err := data.InitData(data.Db); err != nil {
+	if err := data.InitData(); err != nil {
 		log.Panic(err)
 	}
 

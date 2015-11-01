@@ -87,8 +87,7 @@ func (i *RequestInput) extractFilterItem(keys []string, value []string) (err err
 	if index, err = strconv.Atoi(strings.TrimRight(keys[0], "]")); err != nil {
 		return
 	}
-	l := len(i.Filter.Filters)
-	if l <= index {
+	if l := len(i.Filter.Filters); l <= index {
 		i.Filter.Filters = append(i.Filter.Filters, make([]FilterItem, index-l+1)...)
 	}
 	switch strings.TrimRight(keys[1], "]") {
@@ -108,8 +107,7 @@ func (i *RequestInput) extractFilterItem(keys []string, value []string) (err err
 
 func getLogic(value []string) (v int, err error) {
 	var s string
-	s, err = getString(value)
-	if err == nil {
+	if s, err = getString(value); err == nil {
 		switch s {
 		case "and":
 			v = LogicAnd
@@ -149,8 +147,7 @@ func getString(value []string) (v string, err error) {
 
 func getBool(value []string) (v bool, err error) {
 	var s string
-	s, err = getString(value)
-	if err == nil {
+	if s, err = getString(value); err == nil {
 		v, err = strconv.ParseBool(s)
 	}
 	return
