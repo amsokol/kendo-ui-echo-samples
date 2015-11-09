@@ -1,8 +1,8 @@
 package fakedata
 
 import (
-	"github.com/amsokol/kendo-ui-echo-samples/api/data"
 	"errors"
+	"github.com/amsokol/kendo-ui-echo-samples/api/data"
 )
 
 func AddData() (err error) {

@@ -80,7 +80,7 @@ func (i *RequestInput) extractFilterItem(keys []string, value []string) (err err
 		return
 	}
 	if l := len(i.Filter.Filters); l <= idx {
-		i.Filter.Filters = append(i.Filter.Filters, make([]FilterItem, idx -l+1)...)
+		i.Filter.Filters = append(i.Filter.Filters, make([]FilterItem, idx-l+1)...)
 	}
 	switch strings.TrimRight(keys[1], "]") {
 	case "field":
