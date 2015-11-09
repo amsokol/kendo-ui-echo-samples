@@ -15,27 +15,19 @@ import (
 // filter[filters][0][operator]=startswith
 // filter[filters][0][value]=the
 
-const (
-	LogicAnd = iota
-)
-
-const (
-	OperatorStartsWith = iota
-)
-
 type RequestInput struct {
 	Filter Filter
 }
 
 type Filter struct {
-	Logic   int
+	Logic   string
 	Filters []FilterItem
 }
 
 type FilterItem struct {
 	Field      string
 	IgnoreCase bool
-	Operator   int
+	Operator   string
 	Value      string
 }
 
@@ -70,7 +62,7 @@ func (i *RequestInput) extractFilter(keys []string, value []string) (err error) 
 	}
 	switch strings.TrimRight(keys[0], "]") {
 	case "logic":
-		i.Filter.Logic, err = getLogic(value)
+		i.Filter.Logic, err = getString(value)
 	case "filters":
 		err = i.extractFilterItem(keys[1:], value)
 	default:
@@ -83,55 +75,24 @@ func (i *RequestInput) extractFilterItem(keys []string, value []string) (err err
 	if len(keys) != 2 {
 		return errors.New("filter[filters] must have two sub-parameters")
 	}
-	var index int
-	if index, err = strconv.Atoi(strings.TrimRight(keys[0], "]")); err != nil {
+	var idx int
+	if idx, err = strconv.Atoi(strings.TrimRight(keys[0], "]")); err != nil {
 		return
 	}
-	if l := len(i.Filter.Filters); l <= index {
-		i.Filter.Filters = append(i.Filter.Filters, make([]FilterItem, index-l+1)...)
+	if l := len(i.Filter.Filters); l <= idx {
+		i.Filter.Filters = append(i.Filter.Filters, make([]FilterItem, idx -l+1)...)
 	}
 	switch strings.TrimRight(keys[1], "]") {
 	case "field":
-		i.Filter.Filters[index].Field, err = getString(value)
+		i.Filter.Filters[idx].Field, err = getString(value)
 	case "ignoreCase":
-		i.Filter.Filters[index].IgnoreCase, err = getBool(value)
+		i.Filter.Filters[idx].IgnoreCase, err = getBool(value)
 	case "operator":
-		i.Filter.Filters[index].Operator, err = getOperator(value)
+		i.Filter.Filters[idx].Operator, err = getString(value)
 	case "value":
-		i.Filter.Filters[index].Value, err = getString(value)
+		i.Filter.Filters[idx].Value, err = getString(value)
 	default:
 		err = errors.New("filter[filters][<index>] has unsupported sub-parameter")
-	}
-	return
-}
-
-func getLogic(value []string) (v int, err error) {
-	var s string
-	if s, err = getString(value); err == nil {
-		switch s {
-		case "and":
-			v = LogicAnd
-		default:
-			err = errors.New("filter[logic] has unsupported value")
-		}
-	} else {
-		err = errors.New("filter[logic] must have single value")
-	}
-	return
-}
-
-func getOperator(value []string) (v int, err error) {
-	var s string
-	s, err = getString(value)
-	if err == nil {
-		switch s {
-		case "startswith":
-			v = OperatorStartsWith
-		default:
-			err = errors.New("filter[filters][<index>][operator] has unsupported value")
-		}
-	} else {
-		err = errors.New("filter[filters][<index>][operator] must have single value")
 	}
 	return
 }

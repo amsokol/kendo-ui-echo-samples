@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/amsokol/kendo-ui-echo-samples/api/kendoui"
 	"github.com/amsokol/kendo-ui-echo-samples/api/logger"
-	"github.com/amsokol/kendo-ui-echo-samples/data"
+	"github.com/amsokol/kendo-ui-echo-samples/api/data"
 	"github.com/labstack/echo"
 	"log"
 	"net/http"
