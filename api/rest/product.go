@@ -8,7 +8,11 @@ import (
 	"net/http"
 )
 
-var PR domain.ProductStore
+var ps domain.ProductStore
+
+func SetProductStore(s domain.ProductStore) {
+	ps = s
+}
 
 func GetProducts(c *echo.Context) error {
 	i := kendoui.Input(c.Request())
@@ -19,7 +23,7 @@ func GetProducts(c *echo.Context) error {
 		callback = "test"
 	}
 
-	products, err := PR.GetAll()
+	products, err := ps.GetAll()
 	if err == nil {
 		err = c.JSONP(http.StatusOK, callback, products)
 	}

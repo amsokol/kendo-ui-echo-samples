@@ -31,6 +31,6 @@ func (p *productStore) GetAll() (products []domain.Product, err error) {
 	return
 }
 
-func GetProductReader(data *db.DB) domain.ProductStore {
+func GetProductStore(data *db.DB) domain.ProductStore {
 	return &productStore{data: data}
 }

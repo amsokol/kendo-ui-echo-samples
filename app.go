@@ -52,7 +52,7 @@ func main() {
 	}
 
 	// init persistence stores
-	rest.PR = data.GetProductReader(tiedot)
+	rest.SetProductStore(data.GetProductStore(tiedot))
 
 	// Echo instance
 	e := echo.New()
