@@ -25,4 +25,4 @@ _testmain.go
 .idea/workspace.xml
 website/css/
 website/js/
-.db/
+.fakedata-db/

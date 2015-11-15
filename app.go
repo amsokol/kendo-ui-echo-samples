@@ -4,8 +4,9 @@ import (
 	//for extracting service credentials from VCAP_SERVICES
 	//"github.com/cloudfoundry-community/go-cfenv"
 
-	"github.com/amsokol/kendo-ui-echo-samples/api/data"
-	"github.com/amsokol/kendo-ui-echo-samples/api/product"
+	"github.com/HouzuoGuo/tiedot/db"
+	"github.com/amsokol/kendo-ui-echo-samples/api/persistence"
+	"github.com/amsokol/kendo-ui-echo-samples/api/rest"
 	"github.com/amsokol/kendo-ui-echo-samples/fakedata"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
@@ -32,20 +33,26 @@ func main() {
 	}
 
 	// prepare folder for DB with sample data
-	dir := "./.db"
+	dir := "./.fakedata-db"
 	os.RemoveAll(dir)
 	defer os.RemoveAll(dir)
 
-	// init sample data
-	if err := data.InitDb(dir); err != nil {
-		log.Panic(err)
-	}
-	defer data.Db.Close()
+	var tiedot *db.DB
+	var err error
 
 	// init sample data
-	if err := fakedata.AddData(); err != nil {
+	if tiedot, err = db.OpenDB(dir); err != nil {
 		log.Panic(err)
 	}
+	defer tiedot.Close()
+
+	// init sample data
+	if err = fakedata.AddData(tiedot); err != nil {
+		log.Panic(err)
+	}
+
+	// init persistence stores
+	rest.PR = data.GetProductReader(tiedot)
 
 	// Echo instance
 	e := echo.New()
@@ -77,5 +84,5 @@ func main() {
 }
 
 func routes(e *echo.Echo) {
-	e.Get("/products", product.GetProducts)
+	e.Get("/products", rest.GetProducts)
 }

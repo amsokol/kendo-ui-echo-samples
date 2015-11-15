@@ -2,21 +2,21 @@ package fakedata
 
 import (
 	"errors"
-	"github.com/amsokol/kendo-ui-echo-samples/api/data"
+	"github.com/HouzuoGuo/tiedot/db"
 )
 
-func AddData() (err error) {
-	if err = addProducts(); err != nil {
+func AddData(data *db.DB) (err error) {
+	if err = addProducts(data); err != nil {
 		return
 	}
 	return
 }
 
-func addProducts() (err error) {
-	if err = data.Db.Create("Products"); err != nil {
+func addProducts(data *db.DB) (err error) {
+	if err = data.Create("Products"); err != nil {
 		return
 	}
-	products := data.Db.Use("Products")
+	products := data.Use("Products")
 	if products == nil {
 		return errors.New("can't find 'Products' collection")
 	}
